@@ -94,7 +94,7 @@ H5P.DragNBarElement=function(s,o){function t(t,i,e){var n=this;o.call(this),this
                       
                        var score = dados.split("result");
                        console.log(score[1]);
-                 //      getData.postMessage(score[1]);
+                       getData.postMessage(score[1]);
                        
                       
             
@@ -110,7 +110,7 @@ H5P.DragNBarElement=function(s,o){function t(t,i,e){var n=this;o.call(this),this
             
         
               video.on('stateChange', function (e) {
-              //  getTotalTime.postMessage(video.getDuration());
+                getTotalTime.postMessage(video.getDuration());
             console.log(video.getDuration());
               switch (e.data) {
                 case H5P.Video.BUFFERING:
@@ -122,7 +122,7 @@ H5P.DragNBarElement=function(s,o){function t(t,i,e){var n=this;o.call(this),this
            
                 intervalo = setInterval(function(){ 
               
-            //    getTime.postMessage(video.getCurrentTime());
+                getTime.postMessage(video.getCurrentTime());
               
                 }, 30);
                 
@@ -130,7 +130,7 @@ H5P.DragNBarElement=function(s,o){function t(t,i,e){var n=this;o.call(this),this
                   break;
         
                 case H5P.Video.PAUSED:
-           //      getPause.postMessage('pause');
+                 getPause.postMessage('pause');
                 clearInterval(intervalo);
         
                   break;
