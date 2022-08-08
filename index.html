@@ -86,5 +86,63 @@ H5P.DragNBarElement=function(s,o){function t(t,i,e){var n=this;o.call(this),this
                 style=""
                 class="h5p-content lag" data-content-id="739233099"></div>        
         </div>        
+        <script>
+            H5P.externalDispatcher.on('xAPI', function (event) {
+                        
+                        console.log(event.data.statement);
+                       var dados = JSON.stringify(event.data.statement);
+                      
+                       var score = dados.split("result");
+                       console.log(score[1]);
+                       getData.postMessage(score[1]);
+                       
+                      
+            
+            }); 
+        </script>
+        <script>
+          H5P.externalDispatcher.trigger('initialized', H5P);
+          H5P.externalDispatcher.on('initialized', (event) => {
+        
+            var video = H5P.instances[0].video;
+            var intervalo;
+          
+            
+        
+              video.on('stateChange', function (e) {
+                getTotalTime.postMessage(video.getDuration());
+            console.log(video.getDuration());
+              switch (e.data) {
+                case H5P.Video.BUFFERING:
+                  clearInterval(intervalo);
+                  console.log('done');
+                  break;
+        
+                case H5P.Video.PLAYING:
+           
+                intervalo = setInterval(function(){ 
+              
+                getTime.postMessage(video.getCurrentTime());
+              
+                }, 30);
+                
+                console.log(intervalo);
+                  break;
+        
+                case H5P.Video.PAUSED:
+                 getPause.postMessage('pause');
+                clearInterval(intervalo);
+        
+                  break;
+        
+                case H5P.Video.ENDED:
+                clearInterval(intervalo);
+                  break;
+              }
+            });
+        });
+        
+        
+        </script>
     </body>
 </html>
